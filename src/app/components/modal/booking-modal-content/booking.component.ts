@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { ModalComponent } from '../modal-component/modal.component';
 import { ApiService } from '../../../service/api.service';
 import { format } from 'date-fns';
+import { MatDialogRef } from '@angular/material/dialog';
+import { GuestComponent } from '../guest-modal-content/guest.component';
 
 
 
@@ -12,15 +14,14 @@ import { format } from 'date-fns';
 
 })
 export class BookingComponent {
-
-  public constructor(private modal: ModalComponent, private apiService: ApiService) { }
-
   scheduledCheckinDate: Date = new Date();
   scheduledCheckoutDate: Date = new Date();
   id: number = 0;
   usePark: boolean = false;
 
-
+  public constructor(
+    private apiService: ApiService,
+    private dialogRef: MatDialogRef<GuestComponent>) { }
 
 
   salvarDados() {
@@ -40,6 +41,8 @@ export class BookingComponent {
 
       this.apiService.createBooking(dados).subscribe((dados) => {
         this.clearForm();
+        this.closeModal();
+
       },
         (erro) => {
           console.error('Erro ao buscar dados da /booking', erro);
@@ -54,6 +57,10 @@ export class BookingComponent {
     this.scheduledCheckinDate = new Date();
     this.scheduledCheckinDate = new Date();
     this.usePark = false;
+  }
+
+  closeModal(){
+    this.dialogRef.close();
   }
 
 

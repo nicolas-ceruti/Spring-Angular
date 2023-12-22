@@ -10,6 +10,7 @@ import { TableBooking } from '../table-booking/table-booking.component';
   styleUrls: ['./home.component.css']
 })
 
+
 export class HomeComponent {
   public selected: Date | null = null;
 
@@ -17,7 +18,8 @@ export class HomeComponent {
   public guestList: any[] = [];
 
 
-  public constructor(private modal: ModalComponent, private apiService: ApiService) { }
+  public constructor(
+    private modal: ModalComponent, private apiService: ApiService) { }
 
   @ViewChild('guestTable')
   guestTable!: TableGuest;

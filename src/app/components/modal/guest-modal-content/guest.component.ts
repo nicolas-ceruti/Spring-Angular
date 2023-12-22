@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { ModalComponent } from '../modal-component/modal.component';
-import { ApiService } from '../../../service/api.service'; 
+import { ApiService } from '../../../service/api.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -9,13 +10,14 @@ import { ApiService } from '../../../service/api.service';
   styleUrls: ['./guest.component.css']
 })
 export class GuestComponent {
-
-  public constructor(private modal: ModalComponent, private apiService: ApiService) { }
-
   name: string = "";
   document: string = "";
   number: string = "";
 
+  public constructor(
+    private modal: ModalComponent,
+    private apiService: ApiService,
+    private dialogRef: MatDialogRef<GuestComponent>) { }
 
   salvarDados() {
     if (this.name && this.document && this.number) {
@@ -28,6 +30,7 @@ export class GuestComponent {
 
       this.apiService.createGuest(dados).subscribe((dados) => {
         this.clearForm()
+        this.closeModal();
       },
         (erro) => {
           console.error('Erro ao buscar dados da /booking', erro);
@@ -38,12 +41,17 @@ export class GuestComponent {
     }
   }
 
-  clearForm(){
-    this.name = ""; 
-    this.document = ""; 
-    this.number = ""; 
+  clearForm() {
+    this.name = "";
+    this.document = "";
+    this.number = "";
   }
 
- 
+  closeModal(){
+    this.dialogRef.close();
+  }
+
+
+
 
 }

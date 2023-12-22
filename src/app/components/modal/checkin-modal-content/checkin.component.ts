@@ -2,9 +2,7 @@ import { Component, Inject, Input } from '@angular/core';
 import { ModalComponent } from '../modal-component/modal.component';
 import { ApiService } from '../../../service/api.service';
 import { format } from 'date-fns';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-checkin',
@@ -14,24 +12,20 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CheckinComponent {
   checkinId: any;
-
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private apiService: ApiService) {}
-
   checkinDate: Date = new Date();
   isAdvance: boolean = false;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+     private apiService: ApiService,
+     private dialogRef: MatDialogRef<CheckinComponent>) { }
 
   ngOnInit() {
     this.checkinId = this.data?.data?.id;
   }
 
   salvarDados() {
-    let formattedCheckinDate;
-
-    if(this.isAdvance === true){
-      formattedCheckinDate = format(this.checkinDate, 'yyyy-MM-dd\'T\'13:00:00');
-    }else{
-      formattedCheckinDate = format(this.checkinDate, 'yyyy-MM-dd\'T\'14:01:00');
-    }
+    let formattedCheckinDate  = this.formatDateForApi();
 
     if (this.checkinDate) {
 
@@ -42,6 +36,8 @@ export class CheckinComponent {
 
       this.apiService.checkin(dados).subscribe((dados) => {
         this.clearForm()
+        this.closeModal();
+
       },
         (erro) => {
           console.error('Erro ao buscar dados da /booking', erro);
@@ -51,9 +47,18 @@ export class CheckinComponent {
       console.log("Ainda existem campos vazios")
     }
   }
-  clearForm() {
+  private clearForm() {
     this.checkinDate = new Date();
     this.isAdvance = false;
+  }
+
+  private formatDateForApi(): string {
+    const time = this.isAdvance ? '13:10:00' : '14:10:00';
+    return format(this.checkinDate, `yyyy-MM-dd'T'${time}`);
+  }
+
+  closeModal(){
+    this.dialogRef.close();
   }
 
 

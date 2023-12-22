@@ -1,8 +1,8 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ApiService } from '../../../service/api.service';
 import { format } from 'date-fns';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -19,12 +19,15 @@ export class CheckoutComponent {
   finalValue: any;
   checkin: any;
   usePark: any;
-
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private apiService: ApiService) { }
   panelOpenState = false;
-
   checkoutDate: Date = new Date();
   isLate: boolean = false;
+
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private apiService: ApiService,
+    private dialogRef: MatDialogRef<CheckoutComponent>) { }
 
   ngOnInit() {
     this.bookingId = this.data?.data?.id;
@@ -40,25 +43,17 @@ export class CheckoutComponent {
   }
 
   onCheckoutDateChange(event: any) {
-    if(new Date(this.checkoutDate) < new Date(this.checkin)){
-      console.log("menor")
+    if (new Date(this.checkoutDate) < new Date(this.checkin)) {
       this.checkoutDate = new Date(this.checkin);
-    }else{
+    } else {
       this.calculateValue()
     }
   }
 
-  salvarDados() {
-    let formattedCheckoutDate;
-
-    if (this.isLate === true) {
-      formattedCheckoutDate = format(this.checkoutDate, 'yyyy-MM-dd\'T\'12:10:00');
-    } else {
-      formattedCheckoutDate = format(this.checkoutDate, 'yyyy-MM-dd\'T\'11:00:00');
-    }
+  public salvarDados() {
+    const formattedCheckoutDate = this.formatDateForApi();
 
     if (this.checkoutDate) {
-
       const dados = {
         id: this.bookingId,
         checkout: formattedCheckoutDate
@@ -66,6 +61,7 @@ export class CheckoutComponent {
 
       this.apiService.checkout(dados).subscribe((dados) => {
         this.clearForm()
+        this.closeModal();
       },
         (erro) => {
           console.error('Erro ao buscar dados da /booking', erro);
@@ -76,14 +72,8 @@ export class CheckoutComponent {
     }
   }
 
-  calculateValue() {
-    let formattedCheckoutDate;
-
-    if (this.isLate === true) {
-      formattedCheckoutDate = format(this.checkoutDate, 'yyyy-MM-dd\'T\'12:10:00');
-    } else {
-      formattedCheckoutDate = format(this.checkoutDate, 'yyyy-MM-dd\'T\'11:00:00');
-    }
+  public calculateValue() {
+    const formattedCheckoutDate = this.formatDateForApi();
 
     if (this.checkoutDate) {
 
@@ -106,9 +96,18 @@ export class CheckoutComponent {
     }
   }
 
-  clearForm() {
+  private clearForm() {
     this.checkoutDate = new Date();
     this.isLate = false;
+  }
+
+  private formatDateForApi(): string {
+    const time = this.isLate ? '12:10:00' : '11:00:00';
+    return format(this.checkoutDate, `yyyy-MM-dd'T'${time}`);
+  }
+
+  closeModal(){
+    this.dialogRef.close();
   }
 
 
