@@ -1,0 +1,55 @@
+<div class="default">
+    <form class="adjust">
+        <h2>
+            Reserva
+        </h2>
+        <table>
+            <td>
+                <tr>
+                    <mat-form-field class="example-full-width" style="width: 350px;">
+                        <mat-label>Cód. hóspede </mat-label>
+                        <input matInput type="number">
+                    </mat-form-field>
+                </tr>
+                <tr>
+                    <mat-form-field color="accent" style="width: 350px;">
+                        <mat-label>Data de entrada</mat-label>
+                        <input matInput [matDatepicker]="picker1">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                </tr>    
+                <tr>
+                    <mat-form-field color="accent" style="width: 350px;">
+                        <mat-label>Data de saída</mat-label>
+                        <input matInput [matDatepicker]="picker2">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
+                </tr>
+                <tr>
+                    <mat-form-field floatLabel="always">
+                        <mat-label>Valor total</mat-label>
+                        <input matInput type="number" class="example-right-align" placeholder="0">
+                        <span matTextPrefix>R$&nbsp;</span>
+                        <span matTextSuffix>.00</span>
+                      </mat-form-field>
+                </tr>
+                <tr>
+                    <mat-slide-toggle class="example-margin"
+                   >Alugar carro</mat-slide-toggle>
+                    <br/>
+                    <br/>
+                </tr>
+                <tr>
+                    <div style="display:flex; justify-content: space-between;">
+                        <button mat-raised-button color="warn" (click)="closeModal().close">Cancelar</button>
+                        <button mat-raised-button color="primary">Salvar</button>
+                    </div>
+                </tr>
+            </td>
+        </table>
+    </form>
+</div>

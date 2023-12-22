@@ -1,0 +1,36 @@
+<div class="default">
+    <form class="adjust">
+        <div class="title-modal">
+            Cadastro de Hóspede
+        </div>
+        <table>
+            <td>
+                <tr>
+                    <mat-form-field class="input-modal">
+                        <mat-label>Nome Completo</mat-label>
+                        <input matInput  [(ngModel)]="name" name="name">
+                    </mat-form-field>
+                </tr>
+                <tr>
+                    <mat-form-field class="input-modal">
+                        <mat-label>Documento</mat-label>
+                        <input matInput  [(ngModel)]="document" name="document">
+                    </mat-form-field>
+                </tr>    
+                <tr>
+                    <mat-form-field class="input-modal">
+                        <mat-label>Telefone</mat-label>
+                        <input type="tel" matInput  [(ngModel)]="number" name="document" placeholder="9-5555-1234">
+                     
+                    </mat-form-field>
+                </tr>
+                <tr>
+                    <div class="container-buttons">
+                        <button mat-raised-button color="warn" class="button-modal">Cancelar</button>
+                        <button mat-raised-button color="primary"  class="button-modal"  (click)="salvarDados()" >Salvar</button>
+                    </div>
+                </tr>
+            </td>
+        </table>
+    </form>
+</div>

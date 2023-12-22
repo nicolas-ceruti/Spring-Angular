@@ -1,0 +1,57 @@
+.flex-container {
+    width: 100%;
+    display: flex; 
+    background-color: #ffffff;
+    height: 100%;
+    padding: 15px;
+    gap: 5px;
+
+  }
+
+.div-guest{
+  background-color: rgb(201, 201, 201);
+  padding: 20px;
+  display: flex;
+  width: 30%;
+}
+
+.div-booking{
+  background-color: rgb(236, 236, 236);
+  padding: 20px;
+  display: flex;
+  width: 70%;
+
+}
+
+.button-container {
+  justify-content: space-around;     
+  padding: 15px;
+  gap: 50px;
+
+}
+
+.guest-button-container {
+  width: 30%;
+  justify-content: flex-end;     
+  padding: 15px;
+  gap: 50px;
+
+}
+
+.title-toolbar {
+  padding: 30px;
+}
+
+.button-toolbar {
+  padding: 25px;
+  color: #058f3a !important;
+}
+
+.toolbar {
+  background-color: rgb(236, 236, 236);
+  /* box-shadow: -6px 5px 59px 1px #000000 !important; */
+}
+
+table {
+  width: 100%;
+}
