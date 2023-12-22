@@ -9,6 +9,7 @@ import { TableGuest } from '../table-guest/table-guest.component';
   styleUrls: ['./home.component.css']
 })
 
+@Injectable() // Add the Injectable decorator
 export class HomeComponent {
   public selected : Date | null = null;
 

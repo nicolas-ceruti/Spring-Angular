@@ -1,0 +1,31 @@
+<div class="default">
+    <form class="adjust">
+        <div class="title-modal">
+            Realizar Check-in
+        </div>
+        <table>
+            <td>
+                <tr>
+                    <mat-form-field class="input-date-modal">
+                        <input matInput [matDatepicker]="pickerCheckin" [(ngModel)]="checkinDate" name="checkinDate"  placeholder="Check-in">
+                        <mat-datepicker-toggle matSuffix [for]="pickerCheckin"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerCheckin></mat-datepicker>
+                    </mat-form-field>
+                </tr>
+
+                <tr>
+                    <section class="example-section">
+                        <mat-checkbox [(ngModel)]="isAdvance" name="isAdvance" >Check-In Antecipado (antes das 14:00)</mat-checkbox>
+                    </section>
+                </tr>
+                <tr>
+                    <div class="container-buttons">
+                        <button mat-raised-button color="warn" class="button-modal">Cancelar</button>
+                        <button mat-raised-button color="primary" class="button-modal"
+                            (click)="salvarDados()">Salvar</button>
+                    </div>
+                </tr>
+            </td>
+        </table>
+    </form>
+</div>

@@ -4,6 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ModalComponent } from '../modal/modal-component/modal.component';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -11,12 +12,12 @@ import { ModalComponent } from '../modal/modal-component/modal.component';
   styleUrls: ['table-booking.component.css'],
   templateUrl: 'table-booking.component.html',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule],
 })
 
 export class TableBooking implements AfterViewInit {
   @Input() elementData: Booking[] = [];
-  displayedColumns: string[] = ['id', 'guestName', 'scheduledCheckinDate', 'scheduledCheckoutDate', 'checkin', 'checkout', 'actions'];
+  displayedColumns: string[] = ['id', 'guestName', 'scheduledCheckinDate', 'scheduledCheckoutDate', 'checkin', 'checkout', 'value', 'actions'];
 
   public constructor(private modal : ModalComponent){}
 
@@ -28,8 +29,12 @@ export class TableBooking implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  openModal(row: any){
-    return this.modal.openBooking();
+  openCheckin(row: any){
+    return this.modal.openCheckin({ data: row });
+  }
+
+  openCheckout(row: any){
+    return this.modal.openCheckout({ data: row });
   }
 
 }

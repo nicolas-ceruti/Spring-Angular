@@ -1,0 +1,51 @@
+<div class="default">
+    <form class="adjust">
+        <div class="title-modal">
+            Realizar Check-out
+        </div>
+        <table>
+            <td>
+                <tr>
+                    <mat-form-field class="input-date-modal">
+                        <input matInput [matDatepicker]="pickerCheckout" [(ngModel)]="checkoutDate" name="checkoutDate"  placeholder="Check-out">
+                        <mat-datepicker-toggle matSuffix [for]="pickerCheckout"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerCheckout></mat-datepicker>
+                    </mat-form-field>
+                </tr>
+                <tr>
+                    <section class="example-section">
+                        <mat-checkbox [(ngModel)]="isLate" name="isLate" >Check-out Atrasado (após 12:00)</mat-checkbox>
+                    </section>
+                </tr>
+
+
+                <tr>
+                    <mat-accordion>
+                       
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Self aware panel
+                            </mat-panel-title>
+                            <mat-panel-description>
+                              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                          <p>I'm visible because I am open</p>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                </tr>
+
+                <div class="alert-isLate" *ngIf="isLate === true">Será cobrabo um valor correspondente a 50% da próxima diária</div>
+                <tr>
+                    <div class="container-buttons">
+                        <button mat-raised-button color="warn" class="button-modal">Cancelar</button>
+                        <button mat-raised-button color="primary" class="button-modal"
+                            (click)="salvarDados()">Salvar</button>
+                    </div>
+                </tr>
+            </td>
+        </table>
+    </form>
+</div>

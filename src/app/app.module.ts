@@ -27,6 +27,9 @@ import { TableGuest } from './components/table-guest/table-guest.component';
 import { TableBooking } from './components/table-booking/table-booking.component';
 import { BookingComponent } from './components/modal/booking-modal-content/booking.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CheckinComponent } from './components/modal/checkin-modal-content/checkin.component';
+import { CheckoutComponent } from './components/modal/checkout-modal-content/checkout.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -35,11 +38,14 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     AppComponent,
     GuestComponent,
     HomeComponent,
-    BookingComponent
+    BookingComponent,
+    CheckinComponent,
+    CheckoutComponent
   ],
   imports: [ 
     HttpClientModule,
     TableGuest,
+    MatExpansionModule,
     MatCheckboxModule,
     MatDatepickerModule,
     TableBooking,

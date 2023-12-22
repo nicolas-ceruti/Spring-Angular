@@ -39,4 +39,12 @@ export class ApiService {
   createBooking(bookingData: any): Observable<any> {
     return this.httpClient.post<any>('/api/booking', bookingData, this.options);
   }
+
+  checkin(bookingData: any): Observable<any> {
+    return this.httpClient.post<any>('/api/booking/checkin', bookingData, this.options);
+  }
+
+  checkout(bookingData: any): Observable<any> {
+    return this.httpClient.post<any>('/api/booking/checkout', bookingData, this.options);
+  }
 }

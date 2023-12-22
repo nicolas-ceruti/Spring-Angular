@@ -27,7 +27,7 @@ export class BookingComponent {
     const formattedCheckinDate = format(this.scheduledCheckinDate, 'yyyy-MM-dd\'T\'14:01:00');
     const formattedCheckoutDate = format(this.scheduledCheckoutDate, 'yyyy-MM-dd\'T\'11:59:00');
 
-    if (formattedCheckoutDate && formattedCheckinDate && this.id && this.usePark) {
+    if (formattedCheckoutDate && formattedCheckinDate && this.id) {
 
       const dados = {
         guest: {

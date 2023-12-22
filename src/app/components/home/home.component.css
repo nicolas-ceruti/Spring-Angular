@@ -57,6 +57,11 @@
   padding: 30px;
 }
 
+.table-title {
+  color: #575757;
+  margin-right: 15px;
+}
+
 .button-toolbar {
   padding: 25px;
   color: #058f3a !important;
