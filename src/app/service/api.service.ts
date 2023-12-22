@@ -47,4 +47,8 @@ export class ApiService {
   checkout(bookingData: any): Observable<any> {
     return this.httpClient.post<any>('/api/booking/checkout', bookingData, this.options);
   }
+
+  calculateValue(bookingData: any): Observable<any> {
+    return this.httpClient.post<any>('/api/booking/calculateDaily', bookingData, this.options);
+  }
 }

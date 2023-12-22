@@ -30,6 +30,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CheckinComponent } from './components/modal/checkin-modal-content/checkin.component';
 import { CheckoutComponent } from './components/modal/checkout-modal-content/checkout.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -67,7 +68,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCardModule,
     MatDialogModule
   ],
-  providers: [ModalComponent],
+  providers: [ModalComponent , DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

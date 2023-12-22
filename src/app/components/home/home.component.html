@@ -8,7 +8,7 @@
     </div>
 </mat-toolbar>
 <div class="flex-container">
-    <div class="div-booking" *ngIf="bookingList && bookingList.length > 0">
+    <div class="div-booking">
         <div class="guest-button-container">
             <div class="table-title">
                 <h1>Reservas | Hospedagens</h1>
@@ -18,7 +18,7 @@
               </button>        </div>
         <booking-table #bookingTable [elementData]="bookingList"></booking-table>
     </div>
-    <div class="div-guest" *ngIf="guestList && guestList.length > 0">
+    <div class="div-guest">
         <div class="guest-button-container">
             <div class="table-title">
                 <h1>Clientes</h1>

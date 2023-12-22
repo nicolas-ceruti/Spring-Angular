@@ -17,6 +17,8 @@ export class CheckoutComponent {
   dailyValue: any;
   checkoutFee: any;
   finalValue: any;
+  checkin: any;
+  usePark: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private apiService: ApiService) { }
   panelOpenState = false;
@@ -30,11 +32,20 @@ export class CheckoutComponent {
     this.dailyValue = this.data?.data.dailyValue;
     this.checkoutFee = this.data?.data.checkoutFee;
     this.finalValue = this.data?.data.finalValue;
+    this.checkin = this.data?.data.checkin;
+    this.usePark = this.data?.data.usePark;
+    this.checkoutDate = this.checkin
+    this.calculateValue()
 
   }
 
   onCheckoutDateChange(event: any) {
-    console.log('Checkout Date changed:', this.checkoutDate);
+    if(new Date(this.checkoutDate) < new Date(this.checkin)){
+      console.log("menor")
+      this.checkoutDate = new Date(this.checkin);
+    }else{
+      this.calculateValue()
+    }
   }
 
   salvarDados() {
@@ -58,6 +69,36 @@ export class CheckoutComponent {
       },
         (erro) => {
           console.error('Erro ao buscar dados da /booking', erro);
+        })
+
+    } else {
+      console.log("Ainda existem campos vazios")
+    }
+  }
+
+  calculateValue() {
+    let formattedCheckoutDate;
+
+    if (this.isLate === true) {
+      formattedCheckoutDate = format(this.checkoutDate, 'yyyy-MM-dd\'T\'12:10:00');
+    } else {
+      formattedCheckoutDate = format(this.checkoutDate, 'yyyy-MM-dd\'T\'11:00:00');
+    }
+
+    if (this.checkoutDate) {
+
+      const dados = {
+        checkin: this.checkin,
+        checkout: formattedCheckoutDate,
+        usePark: this.usePark
+      };
+
+      this.apiService.calculateValue(dados).subscribe((dados) => {
+        this.dailyValue = dados.dailyValue
+        this.parkFee = dados.parkFee
+      },
+        (erro) => {
+          console.error('Erro ao buscar valores', erro);
         })
 
     } else {
