@@ -48,6 +48,7 @@ export class HomeComponent {
     this.apiService.getGuests().subscribe(
       (dados: any[]) => {
         this.guestList = dados;
+        this.callUpdateTable();
 
       },
       (erro: any) => {
@@ -69,11 +70,27 @@ export class HomeComponent {
     );
   }
 
-  
-  openModal(){
-    return this.modal;
+  locateScheduledBookings() {
+    this.apiService.locateScheduledBookings().subscribe(
+      (dados: any[]) => {
+        this.guestList = dados;
+        this.callUpdateTable();
+
+      },
+      (erro: any) => {
+        console.error('Erro ao buscar dados /guest', erro);
+      }
+    );
   }
 
+  
+  openGuest(){
+    return this.modal.openGuest();
+  }
+
+  openBooking(){
+    return this.modal.openBooking();
+  }
 }
 
 

@@ -28,8 +28,15 @@ export class ApiService {
     return this.httpClient.get<any>("/api/booking/activeGuest", this.options);
   }
 
-  createGuest(guestData: any): Observable<any> {
+  locateScheduledBookings(): Observable<any> {
+    return this.httpClient.get<any>("/api/booking/scheduledBookings", this.options);
+  }
 
+  createGuest(guestData: any): Observable<any> {
     return this.httpClient.post<any>('/api/guest', guestData, this.options);
+  }
+
+  createBooking(bookingData: any): Observable<any> {
+    return this.httpClient.post<any>('/api/booking', bookingData, this.options);
   }
 }

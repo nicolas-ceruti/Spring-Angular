@@ -14,13 +14,13 @@
                 <tr>
                     <mat-form-field class="input-modal">
                         <mat-label>Documento</mat-label>
-                        <input matInput  [(ngModel)]="document" name="document">
+                        <input matInput  [(ngModel)]="document" name="document" inputMode="numeric" pattern="[0-9]*" >
                     </mat-form-field>
                 </tr>    
                 <tr>
                     <mat-form-field class="input-modal">
                         <mat-label>Telefone</mat-label>
-                        <input type="tel" matInput  [(ngModel)]="number" name="document" placeholder="9-5555-1234">
+                        <input type="tel" matInput  [(ngModel)]="number" name="document" placeholder="9 5555 1234" inputMode="numeric" pattern="[0-9]*">
                      
                     </mat-form-field>
                 </tr>

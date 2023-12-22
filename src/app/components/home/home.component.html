@@ -3,18 +3,20 @@
         <h1>Hotel</h1>
     </div>
     <div class="button-container">
-        <button mat-button class="button-toolbar" (click)="openModal().openGuest()">Cadastrar Hóspede</button>
-        <!-- <button mat-button class="button-toolbar" (click)="openModal()">Cadastrar Reserva</button> -->
+        <button mat-button class="button-toolbar" (click)="openGuest()">Cadastrar Hóspede</button>
+        <button mat-button class="button-toolbar" (click)="openBooking()">Cadastrar Reserva</button>
     </div>
 </mat-toolbar>
 <div class="flex-container">
-    <div class="div-guest" *ngIf="guestList && guestList.length > 0">
-        <div  class="guest-button-container">
-            <button  (click)="locateActiveGuests()">Localizar</button>
-        </div>
-        <guest-table #guestTable [elementData]="guestList"></guest-table>
-    </div>
     <div class="div-booking" *ngIf="bookingList && bookingList.length > 0">
         <booking-table [elementData]="bookingList"></booking-table>
+    </div>
+    <div class="div-guest" *ngIf="guestList && guestList.length > 0">
+        <div  class="guest-button-container">
+            <button mat-raised-button color="primary" class="button-container" (click)="getGuests()">Todos</button>
+            <button mat-raised-button color="primary" class="button-container" (click)="locateActiveGuests()">Ativos</button>
+            <button mat-raised-button color="primary" class="button-container" (click)="locateScheduledBookings()">Futuros</button>
+        </div>
+        <guest-table #guestTable [elementData]="guestList"></guest-table>
     </div>
 </div>
