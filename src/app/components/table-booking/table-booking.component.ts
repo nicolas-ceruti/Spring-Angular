@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 
 export class TableBooking implements AfterViewInit {
   @Input() elementData: Booking[] = [];
+  @Output() elementDataChange: EventEmitter<any[]> = new EventEmitter();
   displayedColumns: string[] = ['id', 'guestName', 'scheduledCheckinDate', 'scheduledCheckoutDate', 'checkin', 'checkout', 'value', 'actions'];
 
   public constructor(private modal : ModalComponent){}
@@ -27,6 +28,12 @@ export class TableBooking implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource = new MatTableDataSource<Booking>(this.elementData);
     this.dataSource.paginator = this.paginator;
+  }
+
+  updateTable(dados: Booking[] | undefined) {
+    console.log('Tabela atualizada!');
+    this.dataSource = new MatTableDataSource<Booking>(dados);
+
   }
 
   openCheckin(row: any){

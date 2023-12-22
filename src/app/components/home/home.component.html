@@ -9,19 +9,25 @@
 </mat-toolbar>
 <div class="flex-container">
     <div class="div-booking" *ngIf="bookingList && bookingList.length > 0">
-        <div class="table-title" >
-            <h1>Reservas | Hospedagens</h1>
-        </div>
-        <booking-table [elementData]="bookingList"></booking-table>
+        <div class="guest-button-container">
+            <div class="table-title">
+                <h1>Reservas | Hospedagens</h1>
+            </div>
+            <button mat-button color="primary" (click)="getBookings()">
+                <mat-icon>refresh</mat-icon>
+              </button>        </div>
+        <booking-table #bookingTable [elementData]="bookingList"></booking-table>
     </div>
     <div class="div-guest" *ngIf="guestList && guestList.length > 0">
-        <div  class="guest-button-container">
-            <div class="table-title" >
+        <div class="guest-button-container">
+            <div class="table-title">
                 <h1>Clientes</h1>
             </div>
             <button mat-raised-button color="primary" class="button-container" (click)="getGuests()">Todos</button>
-            <button mat-raised-button color="primary" class="button-container" (click)="locateActiveGuests()">Ativos</button>
-            <button mat-raised-button color="primary" class="button-container" (click)="locateScheduledBookings()">Futuros</button>
+            <button mat-raised-button color="primary" class="button-container"
+                (click)="locateActiveGuests()">Ativos</button>
+            <button mat-raised-button color="primary" class="button-container"
+                (click)="locateScheduledBookings()">Futuros</button>
         </div>
         <guest-table #guestTable [elementData]="guestList"></guest-table>
     </div>

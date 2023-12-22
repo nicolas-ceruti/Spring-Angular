@@ -7,9 +7,9 @@
             <td>
                 <tr>
                     <mat-form-field class="input-date-modal">
-                        <input matInput [matDatepicker]="pickerCheckout" [(ngModel)]="checkoutDate" name="checkoutDate"  placeholder="Check-out">
+                        <input matInput [matDatepicker]="pickerCheckout" [(ngModel)]="checkoutDate" name="checkoutDate" (dateInput)="onCheckoutDateChange($event)"  placeholder="Check-out">
                         <mat-datepicker-toggle matSuffix [for]="pickerCheckout"></mat-datepicker-toggle>
-                        <mat-datepicker #pickerCheckout></mat-datepicker>
+                        <mat-datepicker #pickerCheckout ></mat-datepicker>
                     </mat-form-field>
                 </tr>
                 <tr>
@@ -25,19 +25,16 @@
                         <mat-expansion-panel (opened)="panelOpenState = true"
                                              (closed)="panelOpenState = false">
                           <mat-expansion-panel-header>
-                            <mat-panel-title>
-                              Self aware panel
-                            </mat-panel-title>
-                            <mat-panel-description>
-                              Currently I am {{panelOpenState ? 'open' : 'closed'}}
-                            </mat-panel-description>
+                            <mat-panel-title>Conta</mat-panel-title>
                           </mat-expansion-panel-header>
-                          <p>I'm visible because I am open</p>
+
+                          <p>Total das diárias: R$ {{dailyValue}}</p>
+                          <p>Total de Estacionamento: R$ {{parkFee}}</p>
+                          <div class="alert-isLate" *ngIf="isLate === true">Será cobrabo um valor correspondente a 50% da próxima diária</div>
                         </mat-expansion-panel>
                       </mat-accordion>
                 </tr>
 
-                <div class="alert-isLate" *ngIf="isLate === true">Será cobrabo um valor correspondente a 50% da próxima diária</div>
                 <tr>
                     <div class="container-buttons">
                         <button mat-raised-button color="warn" class="button-modal">Cancelar</button>

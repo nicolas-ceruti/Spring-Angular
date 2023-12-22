@@ -1,5 +1,4 @@
 import { Component, Inject, Input } from '@angular/core';
-import { ModalComponent } from '../modal-component/modal.component';
 import { ApiService } from '../../../service/api.service';
 import { format } from 'date-fns';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -34,6 +33,10 @@ export class CheckoutComponent {
 
   }
 
+  onCheckoutDateChange(event: any) {
+    console.log('Checkout Date changed:', this.checkoutDate);
+  }
+
   salvarDados() {
     let formattedCheckoutDate;
 
@@ -61,6 +64,7 @@ export class CheckoutComponent {
       console.log("Ainda existem campos vazios")
     }
   }
+
   clearForm() {
     this.checkoutDate = new Date();
     this.isLate = false;
