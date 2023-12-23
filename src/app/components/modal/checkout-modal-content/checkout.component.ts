@@ -3,6 +3,7 @@ import { ApiService } from '../../../service/api.service';
 import { format } from 'date-fns';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class CheckoutComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private _snackBar: MatSnackBar,
     private apiService: ApiService,
     private dialogRef: MatDialogRef<CheckoutComponent>) { }
 
@@ -62,20 +64,20 @@ export class CheckoutComponent {
       this.apiService.checkout(dados).subscribe((dados) => {
         this.clearForm()
         this.closeModal();
+        this.openSnackBar("Check-out realizado com sucesso! Atualize a tabela!", "Ok")
+
       },
         (erro) => {
-          console.error('Erro ao buscar dados da /booking', erro);
+          this.openSnackBar("Algo deu errado!", "Ok")
         })
 
     } else {
-      console.log("Ainda existem campos vazios")
+      this.openSnackBar("Preencha corretamente os campos!", "Ok")
     }
   }
 
   public calculateValue() {
     const formattedCheckoutDate = this.formatDateForApi();
-
-    if (this.checkoutDate) {
 
       const dados = {
         checkin: this.checkin,
@@ -88,12 +90,9 @@ export class CheckoutComponent {
         this.parkFee = dados.parkFee
       },
         (erro) => {
-          console.error('Erro ao buscar valores', erro);
+          this.openSnackBar("Algo deu errado ao calcular os valores!", "Ok")
         })
 
-    } else {
-      console.log("Ainda existem campos vazios")
-    }
   }
 
   private clearForm() {
@@ -110,6 +109,10 @@ export class CheckoutComponent {
     this.dialogRef.close();
   }
 
-
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000, 
+    });
+  }
 
 }

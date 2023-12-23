@@ -32,6 +32,7 @@ import { CheckoutComponent } from './components/modal/checkout-modal-content/che
 import {MatExpansionModule} from '@angular/material/expansion';
 import { DatePipe } from '@angular/common';
 import { DeleteComponent } from './components/modal/delete-modal-content/delete.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -46,6 +47,7 @@ import { DeleteComponent } from './components/modal/delete-modal-content/delete.
     DeleteComponent
   ],
   imports: [ 
+    MatSnackBarModule,
     HttpClientModule,
     TableGuest,
     MatExpansionModule,

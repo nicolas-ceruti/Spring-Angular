@@ -3,6 +3,7 @@ import { ModalComponent } from '../modal-component/modal.component';
 import { ApiService } from '../../../service/api.service';
 import { format } from 'date-fns';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-checkin',
@@ -17,6 +18,7 @@ export class CheckinComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private _snackBar: MatSnackBar,
      private apiService: ApiService,
      private dialogRef: MatDialogRef<CheckinComponent>) { }
 
@@ -37,14 +39,15 @@ export class CheckinComponent {
       this.apiService.checkin(dados).subscribe((dados) => {
         this.clearForm()
         this.closeModal();
+        this.openSnackBar("Check-in realizado com sucesso! Atualize a tabela!", "Ok")
 
       },
         (erro) => {
-          console.error('Erro ao buscar dados da /booking', erro);
+          this.openSnackBar("Não é possível realizar um check-in antes das 14:00!", "Ok")
         })
 
     } else {
-      console.log("Ainda existem campos vazios")
+      this.openSnackBar("Preencha os campos corretamente!", "Ok")
     }
   }
   private clearForm() {
@@ -59,6 +62,12 @@ export class CheckinComponent {
 
   closeModal(){
     this.dialogRef.close();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000, 
+    });
   }
 
 

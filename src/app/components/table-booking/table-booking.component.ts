@@ -20,7 +20,8 @@ export class TableBooking implements AfterViewInit {
   @Output() elementDataChange: EventEmitter<any[]> = new EventEmitter();
   displayedColumns: string[] = ['id', 'guestName', 'scheduledCheckinDate', 'scheduledCheckoutDate', 'checkin', 'checkout', 'value', 'actions'];
 
-  public constructor(private modal : ModalComponent){}
+  public constructor(
+    private modal : ModalComponent){}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource<Booking>(this.elementData);

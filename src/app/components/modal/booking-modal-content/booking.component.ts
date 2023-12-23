@@ -4,6 +4,7 @@ import { ApiService } from '../../../service/api.service';
 import { format } from 'date-fns';
 import { MatDialogRef } from '@angular/material/dialog';
 import { GuestComponent } from '../guest-modal-content/guest.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -20,6 +21,7 @@ export class BookingComponent {
   usePark: boolean = false;
 
   public constructor(
+    private _snackBar: MatSnackBar,
     private apiService: ApiService,
     private dialogRef: MatDialogRef<GuestComponent>) { }
 
@@ -42,14 +44,15 @@ export class BookingComponent {
       this.apiService.createBooking(dados).subscribe((dados) => {
         this.clearForm();
         this.closeModal();
+        this.openSnackBar("Reserva cadastrada com sucesso! Atualize a tabela!", "Ok")
 
       },
         (erro) => {
-          console.error('Erro ao buscar dados da /booking', erro);
+          this.openSnackBar("Certifique-se de que existe algum usuário com este ID", "Ok")          
         })
 
     } else {
-      console.log("Ainda existem campos vazios")
+      this.openSnackBar("Preencha os campos corretamente!", "Ok")          
     }
   }
   clearForm() {
@@ -62,6 +65,13 @@ export class BookingComponent {
   closeModal(){
     this.dialogRef.close();
   }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000, 
+    });
+  }
+
 
 
 
