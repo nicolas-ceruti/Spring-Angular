@@ -48,8 +48,12 @@
           <mat-icon>hotel</mat-icon>
         </button>
 
-        <button  *ngIf="row.checkout === null" mat-icon-button color="primary"  (click)="openCheckout(row)">
+        <button  *ngIf="row.checkout === null && row.checkin !== null" mat-icon-button color="primary"  (click)="openCheckout(row)">
           <mat-icon>exit_to_app</mat-icon>
+        </button>
+
+        <button  *ngIf="row.checkout !== null && row.checkin !== null" mat-icon-button color="warn"  (click)="openDelete(row)">
+          <mat-icon>delete</mat-icon>
         </button>
 
       </td>

@@ -51,4 +51,8 @@ export class ApiService {
   calculateValue(bookingData: any): Observable<any> {
     return this.httpClient.post<any>('/api/booking/calculateDaily', bookingData, this.options);
   }
+
+  deleteBooking(id: any): Observable<any> {
+    return this.httpClient.delete<any>(`/api/booking/${id}` , this.options);
+  }
 }

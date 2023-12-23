@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { BookingComponent } from '../booking-modal-content/booking.component';
 import { CheckinComponent } from '../checkin-modal-content/checkin.component';
 import { CheckoutComponent } from '../checkout-modal-content/checkout.component';
+import { DeleteComponent } from '../delete-modal-content/delete.component';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,11 @@ export class ModalComponent {
   public openCheckout(data: any){
     this.modalRef.open(CheckoutComponent,   { data }  );
   }
+
+  public openDelete(data: any){
+    this.modalRef.open(DeleteComponent,   { data }  );
+  }
+ 
  
  
   

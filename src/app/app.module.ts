@@ -31,6 +31,7 @@ import { CheckinComponent } from './components/modal/checkin-modal-content/check
 import { CheckoutComponent } from './components/modal/checkout-modal-content/checkout.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { DatePipe } from '@angular/common';
+import { DeleteComponent } from './components/modal/delete-modal-content/delete.component';
 
 
 
@@ -41,7 +42,8 @@ import { DatePipe } from '@angular/common';
     HomeComponent,
     BookingComponent,
     CheckinComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    DeleteComponent
   ],
   imports: [ 
     HttpClientModule,

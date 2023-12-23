@@ -44,6 +44,10 @@ export class TableBooking implements AfterViewInit {
     return this.modal.openCheckout({ data: row });
   }
 
+  openDelete(row: any){
+    return this.modal.openDelete({ data: row });
+  }
+
 }
 
 export interface Booking {
